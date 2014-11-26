@@ -43,9 +43,10 @@ xsi:schemaLocation="http://localhost/schema/cabinetInfirmier cabinetInfirmier.xs
                 <codePostal>38031</codePostal>
             </adresse>
             <visite date='2014-12-08' intervenant='001'>
+                <acte id='103' />
+                <acte id='104' />
                 <acte id='109' />
-                <acte id='109' />
-                <acte id='109' />
+                <acte id='105' />
             </visite>
         </patient>
         <patient>
@@ -59,7 +60,8 @@ xsi:schemaLocation="http://localhost/schema/cabinetInfirmier cabinetInfirmier.xs
                 <ville>La Tronche</ville>
                 <codePostal>38700</codePostal>
             </adresse>
-            <visite date='2014-12-08'>
+            <visite date='2014-12-08' intervenant="001">
+                <acte id='103' />
             </visite>
         </patient>
         <patient>

@@ -119,9 +119,10 @@
     
     </xsl:template>
     
-    <xsl:template match="cab:acte">
+    <xsl:template match="cab:acte">x
+        <xsl:variable name="idActe" select="@id" />
         <tr>
-            <td>SoinX</td>
+            <td><xsl:value-of select="$actes//act:acte[@id=$idActe]" /> (<xsl:value-of select="$idActe"/>)</td>
         </tr>
     </xsl:template>
 
