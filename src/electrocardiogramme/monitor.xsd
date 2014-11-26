@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://tis3.polytech-grenoble.fr/TP03/monitoring"
+           xmlns="http://tis3.polytech-grenoble.fr/TP03/monitoring"
+           elementFormDefault="qualified">
+
+    <xs:element name="monitor" type="Monitor" />
+    
+    <xs:complexType name="Monitor">
+        <xs:all>
+            <xs:element name="patient" type="Patient" />
+            <xs:element name="cardio" type="Cardio" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="Patient">
+        <xs:all>
+            <xs:element name="firstName" />
+            <xs:element name="nom" />
+            <xs:element name="age" type="xs:nonNegativeInteger" />
+            <xs:element name="room" type="xs:positiveInteger" />
+            <xs:element name="illness" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="Cardio">
+        <xs:all>
+            <xs:element name="start" type="xs:dateTime" />
+            <xs:element name="stop" type="xs:dateTime" />
+            <xs:element name="alert" type="Alert" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:complexType name="Alert">
+        <xs:all>
+            <xs:element name="date" type="xs:dateTime" />
+            <xs:element name="cause"/>
+            <xs:element name="type" type="Type" />
+        </xs:all>
+    </xs:complexType>
+    
+    <xs:simpleType name="Type" >
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="benine" />
+            <xs:enumeration value="severe" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
