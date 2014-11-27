@@ -26,6 +26,24 @@
         <xsl:variable name="nbPatients" select="count($visitesDuJour)" />
         <html>
             <head>
+                <script type="text/javascript">
+                    function openFacture(prenom, nom, actes) {
+                    console.log(actes);
+                    var width  = 500;
+                    var height = 300;
+                    if(window.innerWidth) {
+                    var left = (window.innerWidth-width)/2;
+                    var top = (window.innerHeight-height)/2;
+                    }
+                    else {
+                    var left = (document.body.clientWidth-width)/2;
+                    var top = (document.body.clientHeight-height)/2;
+                    }
+                    var factureWindow = window.open('','facture','menubar=yes, scrollbars=yes, top='+top+', left='+left+', width='+width+', height='+height+'');
+                    factureText = "Facture pour : " + prenom + " " + nom;
+                    factureWindow.document.write(factureText);
+                    }   
+                </script>
                 <title>Bonjour <xsl:value-of select="//cab:infirmier[@id=$destinedId]/cab:prenom"/></title>
             </head>
             <body>
@@ -64,6 +82,7 @@
                 </td>
             </tr>
             <xsl:apply-templates select="cab:visite"/>
+            
         </table>
     </xsl:template>
     
@@ -99,6 +118,7 @@
     
     <xsl:template match="cab:visite">
         <xsl:variable name="idActe" select="cab:acte/@id" />
+        <xsl:variable name="idActes" select="cab:acte" />
         <tr>
             <xsl:element name="th">
                 <xsl:attribute name="rowspan">
@@ -110,20 +130,44 @@
                 <td>Aucun</td>
             </xsl:if>
             <xsl:if test="count(cab:acte) &gt; 0">
-                <td><xsl:value-of select="$actes//act:acte[@id=$idActe]" /> (<xsl:value-of select="$idActe"/>)</td>
+                <td>
+                    <xsl:value-of select="$actes//act:acte[@id=$idActe]" /> (<xsl:value-of select="$idActe"/>)</td>
             </xsl:if> 
         </tr>
         <xsl:apply-templates select="cab:acte[position()>1]"/>
-    
+        <tr>
+            <td colspan="2">
+                <xsl:element name="p">
+                    <xsl:value-of select="$idActes"/>
+                    
+                </xsl:element>
+                <xsl:element name="button">
+                    <xsl:attribute name="onclick">openFacture('<xsl:value-of select="../cab:prenom"/>','<xsl:value-of select="../cab:nom"/>','<xsl:value-of select="cab:acte"/>')</xsl:attribute> 
+                    Facture
+                </xsl:element>
+                <xsl:element name="p">
+                    <xsl:value-of select="cab:acte/@id"/>
+                </xsl:element>
+                    
+                    
+                        
+            </td>
+        </tr>
+        
         
     
     </xsl:template>
     
-    <xsl:template match="cab:acte">x
+    <xsl:template match="cab:acte">
         <xsl:variable name="idActe" select="@id" />
+        <xsl:variable name="idActes" select="cab:acte[@id]" />
         <tr>
-            <td><xsl:value-of select="$actes//act:acte[@id=$idActe]" /> (<xsl:value-of select="$idActe"/>)</td>
+            <td>
+                <xsl:value-of select="$actes//act:acte[@id=$idActe]" /> (<xsl:value-of select="$idActe"/>)</td>
         </tr>
+        
+        
+        
     </xsl:template>
 
 </xsl:stylesheet>

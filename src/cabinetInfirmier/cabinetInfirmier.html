@@ -1,6 +1,24 @@
 <html xmlns:act="http://www.ujf-grenoble.fr/l3miage/actes" xmlns:cab="http://localhost/schema/cabinetInfirmier" xmlns="http://www.w3.org/TR/html4/">
 <head>
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+                    function openFacture(prenom, nom, actes) {
+                    console.log(actes);
+                    var width  = 500;
+                    var height = 300;
+                    if(window.innerWidth) {
+                    var left = (window.innerWidth-width)/2;
+                    var top = (window.innerHeight-height)/2;
+                    }
+                    else {
+                    var left = (document.body.clientWidth-width)/2;
+                    var top = (document.body.clientHeight-height)/2;
+                    }
+                    var factureWindow = window.open('','facture','menubar=yes, scrollbars=yes, top='+top+', left='+left+', width='+width+', height='+height+'');
+                    factureText = "Facture pour : " + prenom + " " + nom;
+                    factureWindow.document.write(factureText);
+                    }   
+                </script>
 <title>Bonjour Annie</title>
 </head>
 <body>
@@ -36,21 +54,30 @@
             Pr&eacute;l&egrave;vement aseptique cutan&eacute; ou de s&eacute;cr&eacute;tions muqueuses, pr&eacute;l&egrave;vement
             de selles ou d'urine pour examens sytologiques, bact&eacute;riologiques, mycologiques.       
          (103)</td>
-</tr>x
-        <tr>
+</tr>
+<tr>
 <td>
             Injection intraveineuse directe isol&eacute;e.
          (104)</td>
-</tr>x
-        <tr>
+</tr>
+<tr>
 <td>
             Injection sous-cutan&eacute;e.
          (109)</td>
-</tr>x
-        <tr>
+</tr>
+<tr>
 <td>
             Injection intraveineuse directe en s&eacute;rie.
          (105)</td>
+</tr>
+<tr>
+<td colspan="2">
+<p></p>
+<button onclick="openFacture('Axel','Aire','')"> 
+                    Facture
+                </button>
+<p>103</p>
+</td>
 </tr>
 </table>
 <table border="1">
@@ -79,6 +106,15 @@
             Pr&eacute;l&egrave;vement aseptique cutan&eacute; ou de s&eacute;cr&eacute;tions muqueuses, pr&eacute;l&egrave;vement
             de selles ou d'urine pour examens sytologiques, bact&eacute;riologiques, mycologiques.       
          (103)</td>
+</tr>
+<tr>
+<td colspan="2">
+<p></p>
+<button onclick="openFacture('Elvire','Orouge','')"> 
+                    Facture
+                </button>
+<p>103</p>
+</td>
 </tr>
 </table>
 </body>
