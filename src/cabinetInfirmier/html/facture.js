@@ -25,7 +25,7 @@ function afficherFacture(prenom, nom, actes)
 
     // Trouver l'adresse du patient
     var xmlDoc = loadXMLDoc("cabinetInfirmier.xml");
-    var patients = xmlDoc.getElementsByTagNameNS("patient", "*");
+    var patients = xmlDoc.getElementsByTagName("patient");
     var i = 0;
     var found = false;
 
