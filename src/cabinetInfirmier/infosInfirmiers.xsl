@@ -26,6 +26,7 @@
         <xsl:variable name="nbPatients" select="count($visitesDuJour)" />
         <html>
             <head>
+                <script type="text/javascript" src="facture.js"/>
                 <script type="text/javascript">
                     function openFacture(prenom, nom, actes) {
                     console.log(actes);
@@ -40,7 +41,8 @@
                     var top = (document.body.clientHeight-height)/2;
                     }
                     var factureWindow = window.open('','facture','menubar=yes, scrollbars=yes, top='+top+', left='+left+', width='+width+', height='+height+'');
-                    factureText = "Facture pour : " + prenom + " " + nom;
+                    //factureText = "Facture pour : " + prenom + " " + nom;
+                    var factureText = afficherFacture(prenom, nom, actes); 
                     factureWindow.document.write(factureText);
                     }   
                 </script>
@@ -142,11 +144,13 @@
                     
                 </xsl:element>
                 <xsl:element name="button">
-                    <xsl:attribute name="onclick">openFacture('<xsl:value-of select="../cab:prenom"/>','<xsl:value-of select="../cab:nom"/>','<xsl:value-of select="cab:acte"/>')</xsl:attribute> 
+                    <xsl:attribute name="onclick">openFacture('<xsl:value-of select="../cab:prenom"/>','<xsl:value-of select="../cab:nom"/>','<xsl:for-each select="cab:acte">
+
+                        <xsl:variable name="idAct" select="@id"/>
+                        <xsl:value-of select="($actes/act:actes/act:acte[@id=$idAct]/@id)"/>
+                        <xsl:text> </xsl:text>
+                    </xsl:for-each>')</xsl:attribute> 
                     Facture
-                </xsl:element>
-                <xsl:element name="p">
-                    <xsl:value-of select="cab:acte/@id"/>
                 </xsl:element>
                     
                     
